@@ -1,0 +1,24 @@
+version: '3'
+services:
+  result:
+    platform: linux/amd64
+    build: ./result
+    ports: 
+      - 5002:80
+
+  vote:
+    build: ./vote
+    ports:
+      - 5001:80
+
+  worker:
+    build: ./worker
+
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=postgres 
+      - POSTGRES_USER=postgres
+
+  redis:
+    image: redis
